@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background-color: #f5f5f5;
+            color: #333;
+            max-width: 600px; /* Adjusted max-width */
+            margin: 0 auto; /* Center the body element */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+            border-radius: 8px; /* Rounded corners for the outer box */
+        }
+
+        h2 {
+            color: #444;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center; /* Centering the title */
+        }
+
+        .setting-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        select, input[type="text"] {
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 8px 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fefefe;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background-color: #5C6BC0; /* Same color as popup button for consistency */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+            max-width: 200px; /* Adjusted max-width */
+            display: block;
+            margin: 20px auto; /* Center button */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Consistent with popup button */
+        }
+
+        button:hover {
+            background-color: #3F51B5; /* Same hover effect as popup button */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* "Lifting" effect */
+        }
+
+        textarea {
+        width: 550px;
+        height: 100px;
+        }
+
+        #saveConfirmation {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            display: none; /* Initially hidden */
+            text-align: center; /* Center the text */
+        }
+
+        .instructions {
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 0.9em; /* Adjust the size as needed */
+        }
+    </style>
+</head>
+<body>
+    <h2>Settings</h2>
+    <div class="setting-item">
+        <label>
+            <input type="checkbox" id="openInNewWindow">
+            Open mass-check tabs in a separate window
+        </label>
+    </div>
+    <div class="setting-item">
+        <label for="cyberChefLocationSelect">CyberChef Location</label>
+        <select id="cyberChefLocationSelect">
+            <option value="https://gchq.github.io/CyberChef/">Public CyberChef</option>
+            <option value="custom">Custom (Enter Below)</option>
+        </select>
+        <input type="text" id="cyberChefLocation" placeholder="Enter the custom URL" style="display:none;">
+    </div>
+    <div class="setting-item">
+        <label>Custom URLs</label>
+        <p class="instructions">Enter title and URL in the format 'Title:URL', one custom URL per line.</p>
+        <p class="instructions">Replace the IOC value in your URL with %s placeholder.</p>
+        <textarea id="customUrls" placeholder="ExampleTitle:https://www.abuseipdb.com/check/%s"></textarea>
+    </div>
+    <button id="saveCustomUrls">Save Custom URLs</button>
+    <button id="saveSettings">Save Settings</button>
+    <div id="saveConfirmation">
+        Settings saved successfully!
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>

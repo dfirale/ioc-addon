@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IOC Query Logs</title>
+    <style>
+        :root {
+            --soft-gray: #F5F7FA;
+            --border-color: #E1E4E8;
+            --hover-color: #EFF3F6;
+            --button-color: #5C6BC0;
+            --button-hover-color: #3F51B5;
+            --text-color: #34495E;
+            --link-color: #3498DB;
+            --link-hover-color: #2980B9;
+            --input-background: #FFFFFF;
+            --input-hover-color: #F0F0F0;
+            --table-header-bg: #ECF0F1;
+        }
+
+        body {
+            font-family: 'Arial', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--soft-gray);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--button-color);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            text-align: left;
+        }
+
+        thead th {
+            background-color: var(--table-header-bg);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        tbody tr:hover {
+            background-color: var(--hover-color);
+        }
+
+        button {
+            background-color: var(--button-color);
+            color: #FFF;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .sortable::after {
+            content: " \2195"; /* Double arrow indicating sorting is possible */
+            color: #999999; /* Medium gray for better visibility */
+            font-size: smaller; /* Make the arrow a bit smaller than the text */
+        }
+
+        .ascending::after {
+            content: " \2191";
+        }
+        .descending::after {
+            content: " \2193";
+        }
+
+        textarea {
+            background-color: var(--input-background);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            transition: background-color 0.3s, border-color 0.3s;
+            resize: vertical; /* Allows resizing vertically */
+            min-height: 50px; /* Minimum height */
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--link-color);
+            background-color: var(--input-hover-color);
+        }
+
+        input[type="text"], input[type="checkbox"] {
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="checkbox"]:focus {
+            outline: none;
+            border-color: var(--link-color);
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--link-hover-color);
+        }
+
+        /* Responsive Table */
+        @media screen and (max-width: 600px) {
+            table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>IOC Query Logs</h2>
+    <button id="exportCsv">Export Selected to CSV</button>
+	<button id="deleteSelected">Delete Selected</button>
+	<button id="refreshPage">Refresh Page</button>
+    <table id="logsTable">
+        <thead>
+            <tr>
+				<th id="selectAllTh">
+					<input type="checkbox" id="selectAllRows">
+				</th>
+				<th class="sortable" id="headerTimestamp">Timestamp</th>
+				<th class="sortable" id="headerIoc">IOC</th>
+				<th class="sortable" id="headerType">Type</th>
+				<th class="sortable" id="headerService">Service</th>
+                <th class="sortable" id="headerUrl">Direct URL</th>
+				<th class="sortable" id="headerComments">Comments</th>
+            </tr>
+			<tr>
+				<th></th> <!-- Placeholder for the selectAll checkbox column -->
+				<th></th> <!-- Placeholder for the Timestamp column -->
+				<th><input type="text" id="searchIoc" placeholder="Filter IOC..."></th>
+				<th><input type="text" id="searchType" placeholder="Filter Type..."></th>
+				<th><input type="text" id="searchService" placeholder="Filter Service..."></th>
+				<th></th> <!-- Placeholder for the Direct URL column -->
+				<th><input type="text" id="searchComments" placeholder="Filter Comments..."></th>
+			</tr>
+        </thead>
+        <tbody id="logTable">
+            <!-- Entries will be dynamically inserted here -->
+        </tbody>
+    </table>
+    <script src="log.js"></script>
+</body>
+</html>

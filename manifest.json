@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "IOC Checker",
+  "version": "1.0",
+  "description": "Open highlighted IOC in AbuseIPDB, VirusTotal, ThreatFox, URLhaus, MalwareBazaar",
+  "icons": {
+    "16": "icons/favicon-16x16.png",
+    "32": "icons/favicon-32x32.png"
+  },
+  "permissions": ["activeTab", "contextMenus", "notifications", "storage", "tabs"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "options_page": "settings.html",
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/favicon-16x16.png",
+      "32": "icons/favicon-32x32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": ["logs.html","log.js"]
+}
